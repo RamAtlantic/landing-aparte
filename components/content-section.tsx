@@ -17,16 +17,21 @@ export function ContentSectionUpdated() {
     setLoadingStates((prevStates) => ({ ...prevStates, button1: true }))
 
     try {
-      const tempEmail = `user_${Date.now()}@example.com`
+   /*    const tempEmail = `user_${Date.now()}@example.com`
       const success = await sendMetaEvent(tempEmail, "10")
 
       if (success) {
         console.log("Evento de registro enviado exitosamente a Meta")
       } else {
         console.warn("No se pudo enviar el evento a Meta")
-      }
+      } */
 
       try {
+        window.fbq("track", "Lead", {
+          content_name: "Botón CTA",
+          value: 10,
+          currency: "USD",
+        });
         await sendTrackingData()
         console.log("Datos de tracking enviados exitosamente")
       } catch (error) {
@@ -81,7 +86,6 @@ export function ContentSectionUpdated() {
                 <Loader />
               ) : (
                 <button
-                  id="cta-button"
                   onClick={() => handleButtonClick("button1")}
                   className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 lg:py-3 px-4 lg:px-6 rounded-r-full rounded-l-none border-2 border-green-400 transition-colors duration-200 font-chango"
                 >
@@ -105,7 +109,6 @@ export function ContentSectionUpdated() {
                   <Loader />
                 ) : (
                   <button
-                    id="cta-button"
                     onClick={() => handleButtonClick("button2")}
                     className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 lg:py-3 px-4 lg:px-6 rounded-r-full rounded-l-none border-2 border-green-400 transition-colors duration-200 font-chango"
                   >
@@ -145,7 +148,6 @@ export function ContentSectionUpdated() {
                 <Loader />
               ) : (
                 <button
-                  id="cta-button"
                   onClick={() => handleButtonClick("button3")}
                   className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 lg:py-3 px-4 lg:px-6 rounded-r-full rounded-l-none border-2 border-green-400 transition-colors duration-200 font-chango"
                 >
@@ -156,11 +158,11 @@ export function ContentSectionUpdated() {
           </RuletaHoverVideo>
 
           {/* Enhanced Create User Card with Crystal Glass Effect */}
-          <motion.div
+          <button
             className="hidden md:flex bg-black rounded-lg p-4 border border-gray-700 items-center justify-center flex-col relative overflow-hidden cursor-pointer group hover:border-yellow-500 hover:shadow-lg transition-all duration-500 ease-in-out"
+            id="create-user-button"
             onClick={handleRegistration}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
+          
           >
             {/* Animated Tech Background */}
             <div className="absolute inset-0 opacity-20">
@@ -235,7 +237,7 @@ export function ContentSectionUpdated() {
                 />
               ))}
             </div>
-          </motion.div>
+          </button>
         </div>
       </section>
 
